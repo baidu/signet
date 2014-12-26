@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.NodeMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Node">
+		<id column="node_id" property="nodeId" jdbcType="INTEGER" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+		<result column="role_sign_id" property="roleSignId" jdbcType="INTEGER" />
+		<result column="is_care" property="isCare" jdbcType="BIT" />
+		<result column="story_id" property="storyId" jdbcType="INTEGER" />
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="node_text" property="nodeText" jdbcType="LONGVARCHAR" />
+		<result column="seq" property="seq" jdbcType="INTEGER" />
+		<result column="create_person" property="createPerson"
+			jdbcType="VARCHAR" />
+		<result column="remark_flag" property="remarkFlag" jdbcType="INTEGER" />
+		<result column="is_retest" property="isRetest" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		node_id, parent_id, role_sign_id, is_care, story_id,
+		project_id,
+		node_text, seq, create_person, remark_flag, is_retest
+  	</sql>
+
+	<select id="selectByProjectId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tb_node
+		where project_id = #{projectId,jdbcType=INTEGER}
+		order by
+		node_id asc
+	</select>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tb_node
+		where node_id = #{nodeId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_node
+		where node_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}  
+		</foreach>
+	</select>
+
+	<select id="selectByCondi" resultMap="BaseResultMap"
+		parameterType="com.baidu.stqa.signet.web.bo.Node">
+		select
+		<include refid="Base_Column_List" />
+		from tb_node
+		where
+		<trim suffixOverrides="and">
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=INTEGER} and 
+    		</if>
+			<if test="storyId != null">
+				story_id = #{storyId,jdbcType=INTEGER} and 
+    		</if>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=INTEGER}  
+    		</if>
+		</trim>
+		order by node_id asc
+	</select>
+
+	<insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Node"
+		useGeneratedKeys="true" keyProperty="nodeId">
+		insert into tb_node
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="nodeId != null">
+				node_id,
+      </if>
+			<if test="parentId != null">
+				parent_id,
+      </if>
+			<if test="roleSignId != null">
+				role_sign_id,
+      </if>
+			<if test="isCare != null">
+				is_care,
+      </if>
+			<if test="storyId != null">
+				story_id,
+      </if>
+			<if test="projectId != null">
+				project_id,
+      </if>
+			<if test="nodeText != null">
+				node_text,
+      </if>
+			<if test="seq != null">
+				seq,
+      </if>
+			<if test="createPerson != null">
+				create_person,
+      </if>
+			<if test="remarkFlag != null">
+				remark_flag,
+      </if>
+			is_retest
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="nodeId != null">
+				#{nodeId,jdbcType=INTEGER},
+      </if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+      </if>
+			<if test="roleSignId != null">
+				#{roleSignId,jdbcType=INTEGER},
+      </if>
+			<if test="isCare != null">
+				#{isCare,jdbcType=BIT},
+      </if>
+			<if test="storyId != null">
+				#{storyId,jdbcType=INTEGER},
+      </if>
+			<if test="projectId != null">
+				#{projectId,jdbcType=INTEGER},
+      </if>
+			<if test="nodeText != null">
+				#{nodeText,jdbcType=LONGVARCHAR},
+      </if>
+			<if test="seq != null">
+				#{seq,jdbcType=LONGVARCHAR},
+      </if>
+			<if test="createPerson != null">
+				#{createPerson,jdbcType=VARCHAR},
+      </if>
+			<if test="remarkFlag != null">
+				#{remarkFlag,jdbcType=INTEGER},
+      </if>
+			0
+		</trim>
+	</insert>
+	<select id="selectByParentId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tb_node
+		where parent_id = #{parentId,jdbcType=INTEGER}
+	</select>
+	<update id="update" parameterType="com.baidu.stqa.signet.web.bo.Node">
+		update tb_node
+		<set>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=INTEGER},
+      		</if>
+			<if test="roleSignId != null">
+				role_sign_id = #{roleSignId,jdbcType=INTEGER},
+      		</if>
+			<if test="isCare != null">
+				is_care = #{isCare,jdbcType=BIT},
+      		</if>
+			<if test="nodeText != null">
+				node_text = #{nodeText,jdbcType=LONGVARCHAR},
+      		</if>
+			<if test="seq != null">
+				seq = #{seq,jdbcType=LONGVARCHAR},
+      		</if>
+			<if test="isRetest != null">
+				is_retest = #{isRetest,jdbcType=LONGVARCHAR},
+      		</if>
+			<if test="remarkFlag != null">
+				remark_flag = #{remarkFlag,jdbcType=LONGVARCHAR},
+      		</if>
+		</set>
+		where node_id = #{nodeId,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteBatch" parameterType="java.lang.Long">
+		delete from tb_node where node_id in
+		<foreach item="nodeId" collection="array" open="(" separator=","
+			close=")">
+			#{nodeId}
+		</foreach>
+	</delete>
+
+	<delete id="delete" parameterType="com.baidu.stqa.signet.web.bo.Node">
+		delete from tb_node where
+		project_id = #{projectId,jdbcType=INTEGER} and
+		story_id = #{storyId,jdbcType=INTEGER}
+	</delete>
+
+</mapper>

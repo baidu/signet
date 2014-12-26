@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Log" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="access_date" property="accessDate" jdbcType="VARCHAR" />
+    <result column="action" property="action" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="space_id" property="spaceId" jdbcType="INTEGER"/>
+  </resultMap>
+   
+  <insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Log" >
+    <![CDATA[
+    insert into tb_log (user, access_date, action, space_id)
+    values (#{user,jdbcType=INTEGER}, #{accessDate,jdbcType=VARCHAR}, #{action,jdbcType=VARCHAR}, #{spaceId,jdbcType=INTEGER})
+    ]]>
+  </insert>
+  
+  <select id="count" resultMap="BaseResultMap">
+    	SELECT space_id, LEFT(access_date,10) AS access_date, COUNT(access_date) AS num 
+    	FROM tb_log 
+    	GROUP BY LEFT(access_date,10) 
+  </select>
+	
+  <select id="countProjectLog" resultMap="BaseResultMap">
+    SELECT space_id,COUNT(space_id) as num
+    FROM tb_log GROUP BY space_id ORDER BY COUNT(space_id) DESC
+  </select>
+  
+  <select id="countProjectLogByDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT space_id,COUNT(space_id) as num
+    FROM tb_log 
+    where access_date > #{date,jdbcType=VARCHAR}
+    GROUP BY space_id ORDER BY COUNT(space_id) DESC
+  </select>
+</mapper>

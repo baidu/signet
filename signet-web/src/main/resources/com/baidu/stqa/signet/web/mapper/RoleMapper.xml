@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Role">
+		<id column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="role_sign_type" property="roleSignType"
+			jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="role_tag" property="roleTag" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		role_id, role_sign_type, name, project_id, role_tag
+  </sql>
+	<select id="selectByCondi" resultMap="BaseResultMap"
+		parameterType="com.baidu.stqa.signet.web.bo.Role">
+		select
+		<include refid="Base_Column_List" />
+		from tb_role
+		where
+		<trim suffixOverrides="and">
+			<if test="roleTag != null">
+				role_tag = #{roleTag,jdbcType=VARCHAR} and
+    	</if>
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=INTEGER} and
+    	</if>
+		</trim>
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_role
+	</select>
+
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_role
+		where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+	<insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Role"
+		useGeneratedKeys="true" keyProperty="roleId">
+		insert into tb_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				role_id,
+      </if>
+			<if test="roleSignType != null">
+				role_sign_type,
+      </if>
+			<if test="name != null">
+				name,
+      </if>
+			<if test="projectId != null">
+				project_id,
+      </if>
+			<if test="roleTag != null">
+				role_tag,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+      </if>
+			<if test="roleSignType != null">
+				#{roleSignType,jdbcType=INTEGER},
+      </if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+      </if>
+			<if test="projectId != null">
+				#{projectId,jdbcType=INTEGER},
+      </if>
+			<if test="roleTag != null">
+				#{roleTag,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+</mapper>

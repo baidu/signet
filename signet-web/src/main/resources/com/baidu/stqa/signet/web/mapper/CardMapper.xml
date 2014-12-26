@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.CardMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Card">
+		<result column="card_id" property="cardId" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="iteration" property="iteration" jdbcType="INTEGER" />
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="is_edit" property="isEdit" />
+		<result column="text" property="text" jdbcType="LONGVARCHAR" />
+		<result column="start_edit_time" property="startEditTime"
+			jdbcType="TIMESTAMP" />
+		<result column="edit_user_name" property="editUserName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		card_id, title, iteration, project_id, is_edit, text, start_edit_time,
+		edit_user_name
+  </sql>
+
+	<update id="update" parameterType="com.baidu.stqa.signet.web.bo.Card">
+		update tb_card
+		set card_id = #{cardId,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		iteration = #{iteration,jdbcType=INTEGER},
+		project_id = #{projectId,jdbcType=INTEGER},
+		is_edit = #{isEdit},
+		text = #{text,jdbcType=LONGVARCHAR},
+		start_edit_time = #{startEditTime,jdbcType=TIMESTAMP},
+		edit_user_name = #{editUserName,jdbcType=VARCHAR}
+		where card_id = #{cardId,jdbcType=INTEGER} and project_id =
+		#{projectId,jdbcType=INTEGER}
+  </update>
+
+	<insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Card">
+		insert into tb_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cardId != null">
+				card_id,
+      </if>
+			<if test="title != null">
+				title,
+      </if>
+			<if test="iteration != null">
+				iteration,
+      </if>
+			<if test="projectId != null">
+				project_id,
+      </if>
+			<if test="isEdit != null">
+				is_edit,
+      </if>
+			<if test="text != null">
+				text,
+      </if>
+			<if test="startEditTime != null">
+				start_edit_time,
+      </if>
+			<if test="editUserName != null">
+				edit_user_name,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cardId != null">
+				#{cardId,jdbcType=INTEGER},
+      </if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+      </if>
+			<if test="iteration != null">
+				#{iteration,jdbcType=INTEGER},
+      </if>
+			<if test="projectId != null">
+				#{projectId,jdbcType=INTEGER},
+      </if>
+			<if test="isEdit != null">
+				#{isEdit},
+      </if>
+			<if test="text != null">
+				#{text,jdbcType=LONGVARCHAR},
+      </if>
+			<if test="startEditTime != null">
+				#{startEditTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="editUserName != null">
+				#{editUserName,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="queryByProjectIdAndStoryId" resultMap="BaseResultMap"
+		parameterType="com.baidu.stqa.signet.web.bo.Card">
+		select
+		<include refid="Base_Column_List" />
+		from tb_card
+		where project_id = #{projectId,jdbcType=INTEGER}
+		and card_id = #{cardId,jdbcType=INTEGER}
+	</select>
+</mapper>

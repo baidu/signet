@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.PropertyMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Property">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="property" property="property" jdbcType="VARCHAR" />
+		<result column="value" property="value" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, property, value
+    </sql>
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tb_project_property
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByCondi" resultMap="BaseResultMap"
+		parameterType="com.baidu.stqa.signet.web.bo.Property">
+		select
+		<include refid="Base_Column_List" />
+		from tb_project_property
+		where id = #{id,jdbcType=INTEGER}
+		and property = #{property,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Property">
+   	 <![CDATA[
+   	 	insert into tb_project_property (id, property, value)
+    	values (#{id,jdbcType=INTEGER},#{property,jdbcType=VARCHAR},#{value,jdbcType=VARCHAR})
+    ]]>
+	</insert>
+
+	<update id="update" parameterType="com.baidu.stqa.signet.web.bo.Property">
+		update tb_project_property
+		set value = #{value,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER} and property =
+		#{property,jdbcType=VARCHAR}
+  </update>
+
+	<delete id="delete" parameterType="com.baidu.stqa.signet.web.bo.Property">
+		delete from tb_project_property
+		where id = #{id,jdbcType=INTEGER}
+		and property = #{property,jdbcType=VARCHAR} 
+  </delete>
+
+
+
+
+</mapper>

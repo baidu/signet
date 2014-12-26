@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.ProjectMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Project">
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="project_desc" property="projectDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		project_id, project_desc
+  </sql>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_project
+	</select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.stqa.signet.web.mapper.SubmitMapper">
+	<resultMap id="BaseResultMap" type="com.baidu.stqa.signet.web.bo.Submit">
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+		<result column="story_id" property="storyId" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		project_id, story_id
+    </sql>
+	<select id="select" resultMap="BaseResultMap"
+		parameterType="com.baidu.stqa.signet.web.bo.Submit">
+		select
+		<include refid="Base_Column_List" />
+		from tb_submit
+		where
+		<trim suffixOverrides="and">
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=INTEGER} and 
+    		</if>
+			<if test="storyId != null">
+				story_id = #{storyId,jdbcType=INTEGER}
+    		</if>
+		</trim>
+	</select>
+	<insert id="insert" parameterType="com.baidu.stqa.signet.web.bo.Submit">
+		insert into tb_submit
+		(project_id, story_id)
+		values (#{projectId,jdbcType=INTEGER},
+		#{storyId,jdbcType=INTEGER})
+  	</insert>
+	<delete id="delete" parameterType="com.baidu.stqa.signet.web.bo.Submit">
+		delete from tb_submit
+		where
+		project_id = #{projectId,jdbcType=INTEGER}
+		and story_id =
+		#{storyId,jdbcType=INTEGER} 
+  	</delete>
+</mapper>

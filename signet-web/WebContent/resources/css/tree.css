@@ -1,0 +1,794 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+	font: normal 12px/1 "微软雅黑", helvetica, arial, sans-serif;
+	background: white;
+	min-width: 960px;
+	line-height: 1.5;
+}
+/* 基础框架样式 */
+.rigel-layer-tip {
+	position: absolute;
+	padding: 5px 16px;
+	color: #333;
+	background: #F9EDBE;
+	border: 1px solid #F0C36D;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-o-border-radius: 0px;
+	-ms-border-radius: 0px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-o-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-ms-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 65535
+}
+
+.rigel-layer-tip img {
+	vertical-align: middle;
+}
+
+.rigel-layer-tip span {
+	vertical-align: middle;
+	color: #999;
+	margin-left: 5px;
+}
+
+.clearfix:after {
+	content: '.';
+	display: block;
+	height: 1px;
+	visibility: hidden;
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+#header {
+	-webkit-user-select: none;
+}
+
+.movedDiv {
+	-webkit-user-select: none;
+}
+/*头部*/
+/* #banner{background:url('../images/nav_bg.png');line-height:31px;position:fixed;width:100%;height:31px;z-index:65534;text-align:center}
+.banner_btn{line-height:31px;padding-left:15px;padding-right:15px;display:inline-block;color:#fff;cursor:pointer}
+.banner_btn:hover{background:url('../images/nav_hover_bg.png');color:#fff} */
+
+/*tree containner*/
+#treeContainner {
+	background-color: #fafafa
+}
+
+#containner {
+	zoom: 1;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	top: 60px;
+	right: 0px;
+}
+
+#nodeContainner {
+	padding-left: 10px;
+	overflow: auto;
+	position: absolute;
+	left: 0px;
+	top: 31px;
+	right: 0px;
+	bottom: 0px;
+	padding-top: 10px
+}
+
+.nodeGroup {
+	clear: both
+}
+
+table {
+	border: 0;
+	position: static;
+}
+
+table td {
+	padding: 0;
+	position: static;
+}
+
+.nodeTd {
+	width: 240px;
+	min-width: 280px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.childContainner {
+	
+}
+
+.nodeText {
+	width: 245px;
+	border: solid 1px #ccc;
+	min-height: 30px;
+	display: inline-block;
+	padding: 2px;
+	padding-left: 11px;
+	padding-right: 8px;
+	background-color: #fff;
+	border: 1px solid rgb(216, 216, 216);
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+	box-shadow: inset 0 0 1px 0px #f6f6f6;
+	color: #333;
+	font: normal 12px/1 "微软雅黑", helvetica, arial, sans-serif;
+	text-align: center;
+	text-shadow: 0 1px 0 white;
+	cursor: pointer;
+	text-align: left;
+	position: relative;
+	box-shadow: 0px 0px 17px #ccc;
+}
+
+.nodeText-isretest {
+	border: 1px solid rgb(0, 216, 0);
+}
+
+.nodeText-hover {
+	background-color: #f9f9f9;
+	-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+	box-shadow: inset 0 0 1px 1px #eaeaea;
+	color: #222;
+	cursor: pointer
+}
+
+.nodeText-active {
+	background-color: #eee;
+	-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+	box-shadow: inset 0 0 1px 1px #eaeaea;
+	color: #222;
+	cursor: pointer
+}
+
+.move_handle {
+	background: url('../images/node_move.png') no-repeat;
+	display: none;
+	height: 11px;
+	width: 11px;
+	left: -1px;
+	top: -1px;
+	position: absolute;
+	cursor: move
+}
+
+.retest_handle {
+	background: url('../images/node_retest.png') no-repeat;
+	cursor: pointer;
+	display: none;
+	height: 11px;
+	width: 11px;
+	right: 0px;
+	position: absolute;
+	bottom: 0px;
+	cursor: pointer
+}
+
+.delete_handle {
+	background: url('../images/node_delete.png') no-repeat;
+	cursor: pointer;
+	display: none;
+	height: 11px;
+	width: 11px;
+	top: 0px;
+	right: 0px;
+	position: absolute;
+	cursor: pointer
+}
+
+.nodeText-hover .delete_handle {
+	display: block
+}
+
+.nodeText-hover .retest_handle {
+	display: block
+}
+
+.firstNodeTd {
+	background: url('../images/indicator-first.png') left center no-repeat
+}
+
+.lastNodeTd {
+	background: url('../images/indicator-last.png') left center no-repeat
+}
+
+.centerNodeTd {
+	background: url('../images/indicator.png') left center
+}
+
+.onlyNodeTd {
+	background: url('../images/indicator-only.png') left center;
+	background-repeat: repeat-x;
+}
+
+.rootNodeTd {
+	background: url('../images/indicator-only.png') 50px center no-repeat
+}
+
+.role,.aSignRole,.testSign,.aTestSignImg {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: middle
+}
+
+.taskText {
+	line-height: 26px;
+	text-overflow: ellipsis;
+	word-break: break-all;
+}
+
+.role,.aSignRole,.testSign,.aTestSignImg {
+	-webkit-user-select: none;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 1px
+}
+
+.choose {
+	background: url('../images/signet/choose.png')
+}
+
+.openLayer {
+	position: absolute
+}
+
+#signet {
+	position: absolute;
+	z-index: 100;
+	border: 1px solid #bbb;
+	border-radius: 0px;
+	background-color: #ccc;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	background-color: #fff
+}
+
+.aSign {
+	width: 188px;
+	text-align: left;
+	padding-left: 11px;
+	line-height: 31px;
+	cursor: pointer
+}
+
+.aSign:hover {
+	background-color: #eee
+}
+
+.aSignRoleName {
+	display: inline-block;
+	color: #333;
+	font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
+	text-align: center;
+	text-shadow: 0 1px 0 white;
+	cursor: pointer
+}
+
+#testSign {
+	position: absolute;
+	z-index: 100;
+	border: 1px solid #bbb;
+	border-radius: 0px;
+	background-color: #ccc;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	background-color: #fff
+}
+
+.aTestSign {
+	width: 152px;
+	text-align: left;
+	padding-left: 11px;
+	line-height: 31px;
+	cursor: pointer
+}
+
+.aTestSign:hover {
+	background-color: #eee
+}
+
+.aTestSignText {
+	display: inline-block;
+	color: #333;
+	font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
+	text-align: center;
+	text-shadow: 0 1px 0 white;
+	cursor: pointer
+}
+
+.masker {
+	z-index: 65535;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: url('../images/opacity.png')
+}
+
+#editMasker {
+	z-index: 65535;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0;
+}
+
+.alert_win {
+	position: fixed;
+	width: 400px;
+	top: 250px;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -200px;
+	border: solid 1px #adb6c9;
+	border-radius: 0px;
+	background-color: white
+}
+
+.alert_title {
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	background-color: #f1f4fa;
+	padding-left: 7px;
+	font-weight: normal
+}
+
+.alert_content {
+	padding: 7px
+}
+
+.alert_buttons {
+	height: 30px;
+	text-align: right;
+	line-height: 10px
+}
+
+.appraise_buttons {
+	height: 30px;
+	text-align: left;
+	line-height: 10px;
+	background-color: #f1f4fa;
+}
+
+.alert_btn {
+	cursor: pointer;
+	margin-right: 10px;
+	-moz-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #637aad
+		), color-stop(1, #5972a7) );
+	background: -moz-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -webkit-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -o-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -ms-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
+	filter: progid : dximagetransform.microsoft.gradient ( startcolorstr =
+		'#637aad', endcolorstr = '#5972a7', gradienttype = 0 );
+	background-color: #637aad;
+	border: 1px solid #314179;
+	display: inline-block;
+	color: #ffffff;
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 6px 12px;
+	text-decoration: none
+}
+
+.alert_btn:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5972a7
+		), color-stop(1, #637aad) );
+	background: -moz-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -webkit-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -o-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -ms-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
+	filter: progid : dximagetransform.microsoft.gradient ( startcolorstr =
+		'#5972a7', endcolorstr = '#637aad', gradienttype = 0 );
+	background-color: #5972a7
+}
+
+.alert_btn:active {
+	position: relative;
+	top: 1px
+}
+
+.changeTextArea {
+	width: 249px;
+	height: 37px;
+	outline: none
+}
+
+.question_win {
+	position: fixed;
+	width: 700px;
+	top: 250px;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -350px;
+	border: solid 1px #adb6c9;
+	border-radius: 0px;
+	background-color: white
+}
+
+.question_title {
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	background-color: #f1f4fa;
+	padding-left: 7px;
+	font-weight: normal
+}
+
+.question_content {
+	padding: 7px
+}
+
+.question_buttons {
+	height: 30px;
+	text-align: right;
+	line-height: 10px
+}
+
+.question_btn {
+	cursor: pointer;
+	margin-right: 10px;
+	-moz-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #637aad
+		), color-stop(1, #5972a7) );
+	background: -moz-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -webkit-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -o-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: -ms-linear-gradient(top, #637aad 5%, #5972a7 100%);
+	background: linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
+	filter: progid : dximagetransform.microsoft.gradient ( startcolorstr =
+		'#637aad', endcolorstr = '#5972a7', gradienttype = 0 );
+	background-color: #637aad;
+	border: 1px solid #314179;
+	display: inline-block;
+	color: #ffffff;
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 6px 12px;
+	text-decoration: none
+}
+
+.question_btn:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5972a7
+		), color-stop(1, #637aad) );
+	background: -moz-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -webkit-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -o-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: -ms-linear-gradient(top, #5972a7 5%, #637aad 100%);
+	background: linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
+	filter: progid : dximagetransform.microsoft.gradient ( startcolorstr =
+		'#5972a7', endcolorstr = '#637aad', gradienttype = 0 );
+	background-color: #5972a7
+}
+
+.question_btn:active {
+	position: relative;
+	top: 1px
+}
+
+#question_ask_text {
+	width: 100%;
+	height: 100%
+}
+
+.appraise_win {
+	position: fixed;
+	width: 400px;
+	top: 250px;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -350px;
+	border: solid 1px #adb6c9;
+	border-radius: 0px;
+	background-color: white
+}
+
+.appraise_content {
+	line-height: 26px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.banner_btn {
+	line-height: 21px;
+	-moz-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	box-shadow: inset 0px 1px 0px 0px #7a8eb9;
+	border: 1px solid #314179;
+	display: inline-block;
+	color: #ffffff;
+	font-family: arial;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 4px 12px;
+	text-decoration: none;
+}
+
+.banner_btn:hover {
+	
+}
+
+.banner_btn:active {
+	position: relative;
+	top: 1px;
+}
+
+.child_control_handle {
+	position: absolute;
+	height: 9px;
+	width: 9px;
+	right: -12px;
+	background-color: #fff;
+	top: 50%;
+	margin-top: -4px;
+}
+
+.child_control_handle_plus {
+	background: url('../images/tree_Tplus.gif') #FFF
+}
+
+.child_control_handle_minus {
+	background: url('../images/tree_Tminus.gif') #FFF
+}
+
+.menuBtn {
+	cursor: pointer;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.menuBtn:hover {
+	border-left: 1px solid #3C5AA8;
+	border-right: 1px solid #3C5AA8;
+	background-color: #3C5AA8
+}
+
+#rootNode {
+	width: 120px;
+	min-width: 120px
+}
+
+#rootNode .nodeText {
+	width: 70px;
+}
+
+.parentNode {
+	-webkit-user-select: none;
+}
+
+.marker {
+	background: url(../images/question.png);
+	min-height: 16px;
+	min-width: 16px;
+	display: none;
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+}
+
+.nodeText-hover .marker {
+	display: block
+}
+
+.questionMark {
+	display: block;
+	background: url(../images/isquestion.png);
+}
+
+.nodeText-hover .appraise {
+	display: block
+}
+
+.bug {
+	background: url(../images/appraise.gif);
+	min-height: 16px;
+	min-width: 16px;
+	display: none;
+	position: absolute;
+	right: 42px;
+	bottom: 8px;
+}
+
+.nodeText-hover .bug {
+	display: block
+}
+
+.bugMark {
+	display: block;
+	background: url(../images/isappraise.gif);
+}
+
+.childNodeTd .nodeText {
+	width: 261px;
+}
+
+.message_title {
+	background-color: #F1F4E1;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 30px;
+	overflow: hidden;
+	border-bottom: dashed 1px #ccc;
+}
+
+.message_user {
+	display: block;
+	float: left;
+}
+
+.message_date {
+	display: block;
+	float: right;
+}
+
+#question_ask {
+	margin: 8px;
+	height: 40px;
+}
+
+.message_content {
+	line-height: 26px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.message {
+	font: normal 12px/1 "微软雅黑", helvetica, arial, sans-serif;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: dashed 1px #ccc;
+}
+
+#question_message {
+	max-height: 300px;
+	overflow: auto
+}
+
+.message_delete {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
+	background: url('../images/close.png');
+	float: right;
+	margin-top: 6px
+}
+
+.appraise_message {
+	font: normal 12px/1 "微软雅黑", helvetica, arial, sans-serif;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: dashed 1px #ccc;
+}
+
+.appraise_delete {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
+	background: url('../images/close.png');
+	float: right;
+	margin-top: 6px
+}
+
+.story_appraise_delete {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
+	background: url('../images/close.png');
+	float: right;
+	margin-top: 6px;
+	margin-right: 5px;
+}
+
+.story_message_title {
+	background-color: #F1F4E1;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 20px;
+	overflow: hidden;
+	border-bottom: dashed 1px #ccc;
+}
+
+.contextInfo {
+	float: left;
+}
+
+/*introduce*/
+#introduceLayer {
+	border-radius: 5px;
+	height: 400px;
+	width: 500px;
+	border: solid 1px #ccc;
+	position: absolute;
+	right: 0px;
+	top: 30px;
+	z-index: 65536;
+	background-color: white;
+	box-shadow: -2px 4px 20px #efefef;
+}
+
+#scoreLayer {
+	border-radius: 5px;
+	height: 400px;
+	width: 300px;
+	border: solid 1px #ccc;
+	position: absolute;
+	right: 0px;
+	top: 30px;
+	z-index: 65536;
+	background-color: white;
+	box-shadow: -2px 4px 20px #efefef;
+}
+
+#arrowLayer {
+	position: absolute;
+	top: -7px;
+	left: 350px;
+}
+
+#scorearrowLayer {
+	position: absolute;
+	top: -7px;
+	left: 92px;
+}
+
+#closeLayer {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+
+#closescoreLayer {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+	float: right;
+}
+
+/*download*/
+#for_story_download_block {
+	position: fixed;
+	top: 100px;
+	right: 16px;
+	z-index: 100;
+}
